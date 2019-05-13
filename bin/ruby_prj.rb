@@ -12,5 +12,4 @@ p_name = CmdArguments.program_name ARGV
 unless p_name.nil?
   rp = RubyProject.new p_name
   rp.create_project
-  rp.create_rvm_files
 end

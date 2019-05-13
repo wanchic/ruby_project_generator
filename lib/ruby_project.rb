@@ -13,22 +13,24 @@ class RubyProject
   def create_project
     puts "Creating #{@project_name} project."
     create_dir_tree
+    generate_rvm_files
   end
 
   def create_dir_tree
     FileUtils.mkdir_p @root_path
   end
 
-  def create_rvm_files
-    [['ruby-version.erb', '.ruby-version']].each do |f|
+  def generate_rvm_files
+    generate_erb_template'ruby-version.erb', '.ruby-version'
+    generate_erb_template'ruby-gemset.erb', '.ruby-gemset'
+  end
 
-      template = File.read(@templates_path + "/#{f[0]}")
-      erb_file = ERB.new(template)
+  def generate_erb_template(template_name, new_filename)
+    template = File.read(@templates_path + "/#{template_name}")
+    erb_file = ERB.new(template)
 
-      File.open(@root_path + "/#{f[1]}", "w") do |wf|
-        wf.write erb_file.result
-      end
-
+    File.open(@root_path + "/#{new_filename}", "w") do |wf|
+      wf.write erb_file.result(binding)
     end
   end
 end
