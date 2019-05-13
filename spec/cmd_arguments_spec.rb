@@ -1,11 +1,6 @@
 require 'active_support/core_ext/kernel/reporting'
 require 'cmd_arguments'
 
-def rand_name
-  c = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-  (1..((rand*25)+1)).map{|| c[rand * c.size]}.join
-end
-
 describe CmdArguments do
   it "should be provide a default name if no command arguments are given" do
     prog_name = CmdArguments.program_name []
