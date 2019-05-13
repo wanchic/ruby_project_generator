@@ -6,9 +6,9 @@ def rand_name
 end
 
 describe CmdArguments do
-  it "should be empty if no command arguments are given" do
+  it "should be provide a default name if no command arguments are given" do
     prog_name = CmdArguments.program_name []
-    expect(prog_name).to be(nil)
+    expect(prog_name).to eq('new_app')
   end
 
   it "should be empty if two or more command arguments are given" do
@@ -18,8 +18,9 @@ describe CmdArguments do
   end
 
   it "should be provide a name if one command argument is given" do
-    prog_name = CmdArguments.program_name [rand_name]
-    expect(prog_name).to be(prog_name)
+    arg = rand_name
+    prog_name = CmdArguments.program_name [arg]
+    expect(prog_name).to eq(arg)
   end
 
 end
