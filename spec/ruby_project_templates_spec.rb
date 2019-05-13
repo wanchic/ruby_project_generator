@@ -58,6 +58,29 @@ describe RubyProject do
 
     end
 
+    context 'should generate a main exec' do
+      before do
+        test_erb_generation 'main_exec.erb', "#{@rp.project_name}.rb"
+      end
+
+      it 'should include bash env command' do
+        expect(@buffer.string).to include('#!/usr/bin/env ruby')
+      end
+
+      it 'should include lib in the load path' do
+        expect(@buffer.string).to include("$LOAD_PATH << File.expand_path(File.join(['..', 'lib']), __dir__ )")
+      end
+
+      it 'should require rubygems' do
+        expect(@buffer.string).to include("require 'rubygems'")
+      end
+
+      it 'should include a require loop on lib' do
+        expect(@buffer.string).to include("Dir[File.expand_path(File.join(['..', 'lib','*.rb']), __dir__ )].sort.each{|f| require f}")
+      end
+
+    end
+
   end
 
 end

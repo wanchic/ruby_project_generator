@@ -37,5 +37,24 @@ describe RubyProject do
 
     end
 
+    context 'setting up main exec file' do
+      before do
+        @filename = "#{@rp.project_name}.rb"
+        @rp.process_main_exec
+      end
+
+      it 'should create a bin directory' do
+        @filepath = "#{@rp_dir}/bin"
+        expect(File).to exist(@filepath)
+        expect(File).to be_directory(@filepath)
+      end
+
+      it "should create #{@filename} file" do
+        @filepath = "#{@rp_dir}/bin/#{@filename}"
+        expect(File).to exist(@filepath)
+      end
+
+    end
+
   end
 end

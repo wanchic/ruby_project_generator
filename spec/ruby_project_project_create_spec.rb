@@ -13,25 +13,20 @@ describe RubyProject do
     end
 
     context 'should call method:' do
+      c_methods = [:create_dir_tree, :generate_rvm_files, :process_gemfile,
+                   :process_main_exec]
+
       before do
-        RubyProject.any_instance.stub(:create_dir_tree)
-        RubyProject.any_instance.stub(:generate_rvm_files)
-        RubyProject.any_instance.stub(:process_gemfile)
+        c_methods.each { |c_method| RubyProject.any_instance.stub(c_method) }
 
         @rp = RubyProject.new
         @rp.create_project
       end
 
-      it ':create_dir_tree' do
-        expect(@rp).to have_received(:create_dir_tree)
-      end
-
-      it ':generate_rvm_files' do
-        expect(@rp).to have_received(:generate_rvm_files)
-      end
-
-      it ':process_gemfile' do
-        expect(@rp).to have_received(:process_gemfile)
+      c_methods.each do |c_method|
+        it ":#{c_method}" do
+          expect(@rp).to have_received(c_method)
+        end
       end
 
     end
