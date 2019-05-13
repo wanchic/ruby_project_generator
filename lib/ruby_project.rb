@@ -15,6 +15,7 @@ class RubyProject
     create_dir_tree
     generate_rvm_files
     process_gemfile
+    process_main_exec
   end
 
   def create_dir_tree
@@ -37,7 +38,8 @@ class RubyProject
   end
 
   def process_main_exec
-
+    FileUtils.mkdir_p "#{@root_path}/bin"
+    generate_erb_template'main_exec.erb', "bin/#{@project_name}.rb"
   end
 
   def generate_erb_template(template_name, new_filename)

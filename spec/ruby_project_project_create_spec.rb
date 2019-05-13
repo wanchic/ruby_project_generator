@@ -67,4 +67,22 @@ describe RubyProject do
 
   end
 
+
+  context 'generating main exec' do
+    context 'should call method:' do
+      before do
+        RubyProject.any_instance.stub(:generate_erb_template)
+
+        @rp = RubyProject.new
+        @rp.process_gemfile
+      end
+
+      it ':generate_erb_template' do
+        expect(@rp).to have_received(:generate_erb_template).at_least(:once)
+      end
+
+    end
+
+  end
+
 end
