@@ -26,5 +26,16 @@ describe RubyProject do
 
     end
 
+    context 'setting up Gemfile' do
+      ['Gemfile', 'Gemfile.lock'].each do |f|
+        it "should create #{f} file" do
+          @filepath = @rp_dir + "/#{f}"
+          @rp.process_gemfile
+          expect(File).to exist(@filepath)
+        end
+      end
+
+    end
+
   end
 end

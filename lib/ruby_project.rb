@@ -14,6 +14,7 @@ class RubyProject
     puts "Creating #{@project_name} project."
     create_dir_tree
     generate_rvm_files
+    process_gemfile
   end
 
   def create_dir_tree
@@ -23,6 +24,16 @@ class RubyProject
   def generate_rvm_files
     generate_erb_template'ruby-version.erb', '.ruby-version'
     generate_erb_template'ruby-gemset.erb', '.ruby-gemset'
+  end
+
+  def process_gemfile
+    generate_erb_template'Gemfile.erb', 'Gemfile'
+
+    Bundler.with_clean_env do
+      Dir.chdir @root_path do
+        `bundle install`
+      end
+    end
   end
 
   def generate_erb_template(template_name, new_filename)

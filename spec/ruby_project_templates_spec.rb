@@ -27,6 +27,37 @@ describe RubyProject do
       expect(@buffer.string).to eq(@rp.project_name)
     end
 
+    context 'should generate a Gemfile' do
+      before do
+        test_erb_generation 'Gemfile.erb', 'Gemfile'
+      end
+
+      it 'should include rubygems source' do
+        expect(@buffer.string).to include("source 'https://rubygems.org'")
+      end
+
+      it 'should include rspec' do
+        expect(@buffer.string).to include("gem 'rspec'")
+      end
+
+      it 'should include simplecov' do
+        expect(@buffer.string).to include("gem 'simplecov'")
+      end
+
+      it 'should include activerecord' do
+        expect(@buffer.string).to include("gem 'activerecord'")
+      end
+
+      it 'should include rvm reference to ruby version' do
+        expect(@buffer.string).to include('#ruby=ruby-')
+      end
+
+      it 'should include rvm reference to ruby gemset' do
+        expect(@buffer.string).to include("#ruby-gemset=#{@rp.project_name}")
+      end
+
+    end
+
   end
 
 end
