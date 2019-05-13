@@ -3,3 +3,4 @@ source 'https://rubygems.org'
 #ruby-gemset=prj_gen
 
 gem 'rspec', '~> 3.8'
+gem 'simplecov', require: false, group: :test
