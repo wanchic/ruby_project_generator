@@ -17,6 +17,7 @@ class RubyProject
     generate_rvm_files
     process_gemfile
     process_main_exec
+    process_command_arguments
   end
 
   def create_dir_tree
@@ -44,7 +45,8 @@ class RubyProject
   end
 
   def process_command_arguments
-    
+    FileUtils.mkdir_p "#{@root_path}/lib"
+    generate_erb_template'cmd_arguments.erb', "lib/cmd_arguments.rb"
   end
 
   def generate_erb_template(template_name, new_filename)
