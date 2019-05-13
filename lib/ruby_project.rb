@@ -43,6 +43,10 @@ class RubyProject
     generate_erb_template'main_exec.erb', "bin/#{@project_name}.rb"
   end
 
+  def process_command_arguments
+    
+  end
+
   def generate_erb_template(template_name, new_filename)
     template = File.read(@templates_path + "/#{template_name}")
     erb_file = ERB.new(template)

@@ -56,5 +56,27 @@ describe RubyProject do
 
     end
 
+    context 'setting up command arguments' do
+      filename = 'cmd_arguments.rb'
+
+      before do
+        @filename = filename
+        @rp.process_command_arguments
+      end
+
+      it 'should create a lib directory' do
+        @filepath = "#{@rp_dir}/lib"
+        expect(File).to exist(@filepath)
+        expect(File).to be_directory(@filepath)
+      end
+
+      it "should create #{filename} file" do
+        @filepath = "#{@rp_dir}/lib/#{@filename}"
+        puts @filepath
+        expect(File).to exist(@filepath)
+      end
+
+    end
+
   end
 end

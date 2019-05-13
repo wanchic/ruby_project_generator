@@ -81,6 +81,18 @@ describe RubyProject do
 
     end
 
+    context 'should generate a CmdArguments module' do
+      before do
+        test_erb_generation 'cmd_arguments.erb', "lib/cmd_arguments.rb"
+      end
+
+      it 'should be a module' do
+        expect(@buffer.string).to include('module CmdArguments')
+      end
+
+    end
+
+
   end
 
 end

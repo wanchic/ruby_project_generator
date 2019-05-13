@@ -14,7 +14,7 @@ describe RubyProject do
 
     context 'should call method:' do
       c_methods = [:create_dir_tree, :generate_rvm_files, :process_gemfile,
-                   :process_main_exec]
+                   :process_main_exec, :process_command_arguments]
 
       before do
         c_methods.each { |c_method| RubyProject.any_instance.stub(c_method) }
@@ -67,7 +67,6 @@ describe RubyProject do
 
   end
 
-
   context 'generating main exec' do
     context 'should call method:' do
       before do
@@ -84,5 +83,23 @@ describe RubyProject do
     end
 
   end
+
+  context 'generating lib command arguments' do
+    context 'should call method:' do
+      before do
+        RubyProject.any_instance.stub(:generate_erb_template)
+
+        @rp = RubyProject.new
+        @rp.process_command_arguments
+      end
+
+      it ':generate_erb_template' do
+        expect(@rp).to have_received(:generate_erb_template).at_least(:once)
+      end
+
+    end
+
+  end
+
 
 end
