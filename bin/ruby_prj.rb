@@ -11,4 +11,6 @@ p_name = CmdArguments.program_name ARGV
 
 unless p_name.nil?
   puts "Creating #{p_name} project."
+  rp = RubyProject.new p_name
+  rp.create_dir_tree
 end
