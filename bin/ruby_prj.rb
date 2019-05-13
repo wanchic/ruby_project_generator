@@ -1,10 +1,11 @@
 #!/usr/bin/env ruby
 
-$LOAD_PATH << File.expand_path(File.join('..', 'lib'), __dir__ )
+$LOAD_PATH << File.expand_path(File.join(['..', 'lib']), __dir__ )
 
 require 'rubygems'
 require 'erb'
-require 'cmd_arguments'
+
+Dir[File.expand_path(File.join(['..', 'lib','*.rb']), __dir__ )].sort.each{|f| require f}
 
 p_name = CmdArguments.program_name ARGV
 
