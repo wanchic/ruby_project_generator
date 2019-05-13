@@ -1,5 +1,6 @@
 require 'fileutils'
 require 'erb'
+require 'bundler'
 
 class RubyProject
   attr_reader :project_name
