@@ -1,3 +1,4 @@
+require 'active_support/core_ext/kernel/reporting'
 require 'ruby_project'
 
 describe RubyProject do
@@ -23,7 +24,16 @@ describe RubyProject do
   context 'method:' do
     before do
       @rp = RubyProject.new
+    end
 
+    context 'creating project' do
+      it 'should display a message "Creating Project"' do
+        output = capture(:stdout) do
+          @rp.create_project
+        end
+
+        expect(output).to include "Creating #{@rp.project_name} project."
+      end
     end
 
     context 'creating directory tree' do

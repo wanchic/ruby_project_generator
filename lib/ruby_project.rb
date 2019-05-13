@@ -7,6 +7,10 @@ class RubyProject
     @project_name = project_name
   end
 
+  def create_project
+    puts "Creating #{@project_name} project."
+  end
+
   def create_dir_tree
     puts File.expand_path(File.join(['..','..', @project_name]), __dir__ )
     FileUtils.mkdir_p File.expand_path(File.join(['..','..', @project_name]), __dir__ )
