@@ -10,7 +10,6 @@ Dir[File.expand_path(File.join(['..', 'lib','*.rb']), __dir__ )].sort.each{|f| r
 p_name = CmdArguments.program_name ARGV
 
 unless p_name.nil?
-  puts "Creating #{p_name} project."
   rp = RubyProject.new p_name
-  rp.create_dir_tree
+  rp.create_project
 end

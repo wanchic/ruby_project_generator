@@ -27,6 +27,13 @@ describe RubyProject do
     end
 
     context 'creating project' do
+      before do
+        RubyProject.any_instance.stub(:create_dir_tree)
+
+        @rp = RubyProject.new
+        @rp.create_project
+      end
+
       it 'should display a message "Creating Project"' do
         output = capture(:stdout) do
           @rp.create_project
@@ -34,6 +41,11 @@ describe RubyProject do
 
         expect(output).to include "Creating #{@rp.project_name} project."
       end
+
+      it 'should call :create_dir_tree' do
+        expect(@rp).to have_received(:create_dir_tree)
+      end
+
     end
 
     context 'creating directory tree' do

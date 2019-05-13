@@ -9,6 +9,7 @@ class RubyProject
 
   def create_project
     puts "Creating #{@project_name} project."
+    create_dir_tree
   end
 
   def create_dir_tree
