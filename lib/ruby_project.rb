@@ -19,6 +19,7 @@ class RubyProject
     process_main_exec
     process_command_arguments
     setup_rspec_testing
+    setup_git_and_commit
   end
 
   def create_dir_tree
@@ -54,6 +55,10 @@ class RubyProject
     FileUtils.mkdir_p "#{@root_path}/spec"
     generate_erb_template'rspec.erb', '.rspec'
     generate_erb_template'spec_helper.erb', "spec/spec_helper.rb"
+  end
+
+  def setup_git_and_commit
+    generate_erb_template'gitignore.erb', '.gitignore'
   end
 
   def generate_erb_template(template_name, new_filename)
