@@ -49,6 +49,10 @@ class RubyProject
     generate_erb_template'cmd_arguments.erb', "lib/cmd_arguments.rb"
   end
 
+  def setup_rspec_testing
+
+  end
+
   def generate_erb_template(template_name, new_filename)
     template = File.read(@templates_path + "/#{template_name}")
     erb_file = ERB.new(template)
