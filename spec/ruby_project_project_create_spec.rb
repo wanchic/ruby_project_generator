@@ -1,6 +1,16 @@
 require 'active_support/core_ext/kernel/reporting'
 require 'ruby_project'
 
+shared_examples 'a generate_erb_template' do |call_method|
+  it ':generate_erb_template' do
+    RubyProject.any_instance.stub(:generate_erb_template)
+    @rp = RubyProject.new
+
+    @rp.send(call_method)
+    expect(@rp).to have_received(:generate_erb_template).at_least(:once)
+  end
+end
+
 describe RubyProject do
   context 'creating project' do
     it 'should display a message "Creating Project"' do
@@ -32,74 +42,21 @@ describe RubyProject do
     end
 
   end
-
+  
   context 'creating rvm files' do
-    context 'should call method:' do
-      before do
-        RubyProject.any_instance.stub(:generate_erb_template)
-
-        @rp = RubyProject.new
-        @rp.generate_rvm_files
-      end
-
-      it ':generate_erb_template' do
-        expect(@rp).to have_received(:generate_erb_template).at_least(:once)
-      end
-
-    end
-
+    it_behaves_like 'a generate_erb_template', 'generate_rvm_files'
   end
 
   context 'generating Gemfile' do
-    context 'should call method:' do
-      before do
-        RubyProject.any_instance.stub(:generate_erb_template)
-
-        @rp = RubyProject.new
-        @rp.process_gemfile
-      end
-
-      it ':generate_erb_template' do
-        expect(@rp).to have_received(:generate_erb_template).at_least(:once)
-      end
-
-    end
-
+    it_behaves_like 'a generate_erb_template', 'process_gemfile'
   end
 
   context 'generating main exec' do
-    context 'should call method:' do
-      before do
-        RubyProject.any_instance.stub(:generate_erb_template)
-
-        @rp = RubyProject.new
-        @rp.process_gemfile
-      end
-
-      it ':generate_erb_template' do
-        expect(@rp).to have_received(:generate_erb_template).at_least(:once)
-      end
-
-    end
-
+    it_behaves_like 'a generate_erb_template', 'process_main_exec'
   end
 
   context 'generating lib command arguments' do
-    context 'should call method:' do
-      before do
-        RubyProject.any_instance.stub(:generate_erb_template)
-
-        @rp = RubyProject.new
-        @rp.process_command_arguments
-      end
-
-      it ':generate_erb_template' do
-        expect(@rp).to have_received(:generate_erb_template).at_least(:once)
-      end
-
-    end
-
+    it_behaves_like 'a generate_erb_template', 'process_command_arguments'
   end
-
 
 end
