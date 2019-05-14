@@ -98,5 +98,17 @@ describe RubyProject do
 
     end
 
+    context 'setting up git and commiting' do
+      before do
+        @rp.setup_git_and_commit
+      end
+
+      it "should create .gitignore file" do
+        @filepath = "#{@rp_dir}/.gitignore"
+        expect(File).to exist(@filepath)
+      end
+
+    end
+
   end
 end

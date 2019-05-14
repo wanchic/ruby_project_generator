@@ -25,7 +25,7 @@ describe RubyProject do
     context 'should call method:' do
       c_methods = [:create_dir_tree, :generate_rvm_files, :process_gemfile,
                    :process_main_exec, :process_command_arguments,
-                   :setup_rspec_testing]
+                   :setup_rspec_testing, :setup_git_and_commit]
 
       before do
         c_methods.each { |c_method| RubyProject.any_instance.stub(c_method) }
@@ -62,6 +62,10 @@ describe RubyProject do
 
   context 'generating rspec testing and coverage' do
     it_behaves_like 'a generate_erb_template', 'setup_rspec_testing'
+  end
+
+  context 'generating git file' do
+    it_behaves_like 'a generate_erb_template', 'setup_git_and_commit'
   end
 
 end

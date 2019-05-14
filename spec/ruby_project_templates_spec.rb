@@ -126,6 +126,24 @@ describe RubyProject do
 
     end
 
+    context 'should generate a .gitignore file' do
+      before do
+        test_erb_generation 'gitignore.erb', ".gitignore"
+      end
+
+      it "should ignore simplecov" do
+        expect(@buffer.string).to include('/coverage/*')
+      end
+
+      it "should ignore RubyMine" do
+        expect(@buffer.string).to include('/.idea/*')
+      end
+
+      it "should ignore bundler" do
+        expect(@buffer.string).to include('/.bundle')
+      end
+
+    end
 
   end
 
