@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 #ruby-gemset=prj_gen
 
 gem 'git', '1.5.0'
+gem 'rake'
 
 group :test do
   gem 'rspec', '~> 3.8'
