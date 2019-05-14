@@ -3,9 +3,9 @@ source 'https://rubygems.org'
 #ruby-gemset=prj_gen
 
 gem 'git', '1.5.0'
-gem 'rake'
 
 group :test do
+  gem 'rake'
   gem 'rspec', '~> 3.8'
   gem 'simplecov', require: false
 
