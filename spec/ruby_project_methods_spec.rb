@@ -38,6 +38,7 @@ describe RubyProject do
     end
 
     context 'setting up main exec file' do
+
       before do
         @filename = "#{@rp.project_name}.rb"
         @rp.process_main_exec
@@ -49,7 +50,7 @@ describe RubyProject do
         expect(File).to be_directory(@filepath)
       end
 
-      it "should create #{@filename} file" do
+      it "should create main exec file as the 'project_name'.rb in the 'bin' folder" do
         @filepath = "#{@rp_dir}/bin/#{@filename}"
         expect(File).to exist(@filepath)
       end
@@ -57,10 +58,7 @@ describe RubyProject do
     end
 
     context 'setting up command arguments' do
-      filename = 'cmd_arguments.rb'
-
       before do
-        @filename = filename
         @rp.process_command_arguments
       end
 
@@ -70,9 +68,8 @@ describe RubyProject do
         expect(File).to be_directory(@filepath)
       end
 
-      it "should create #{filename} file" do
-        @filepath = "#{@rp_dir}/lib/#{@filename}"
-        puts @filepath
+      it "should create cmd_arguments.rb file in the 'lib' folder" do
+        @filepath = "#{@rp_dir}/lib/cmd_arguments.rb"
         expect(File).to exist(@filepath)
       end
 

@@ -52,7 +52,7 @@ class RubyProject
   def generate_erb_template(template_name, new_filename)
     template = File.read(@templates_path + "/#{template_name}")
     erb_file = ERB.new(template)
-
+    
     File.open(@root_path + "/#{new_filename}", "w") do |wf|
       wf.write erb_file.result(binding)
     end
