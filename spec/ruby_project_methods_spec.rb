@@ -75,5 +75,28 @@ describe RubyProject do
 
     end
 
+    context 'setting up rspec & simplecov' do
+      before do
+        @rp.setup_rspec_testing
+      end
+
+      it 'should create a spec directory' do
+        @filepath = "#{@rp_dir}/spec"
+        expect(File).to exist(@filepath)
+        expect(File).to be_directory(@filepath)
+      end
+
+      it "should create .rspec file" do
+        @filepath = "#{@rp_dir}/.rspec"
+        expect(File).to exist(@filepath)
+      end
+
+      it "should create spec_helper.rb file in the 'spec' folder" do
+        @filepath = "#{@rp_dir}/spec/spec_helper.rb"
+        expect(File).to exist(@filepath)
+      end
+
+    end
+
   end
 end

@@ -92,6 +92,40 @@ describe RubyProject do
 
     end
 
+    context 'should generate a .rspec file' do
+      before do
+        test_erb_generation 'rspec.erb', ".rspec"
+      end
+
+      it 'should require spec_helper' do
+        expect(@buffer.string).to include('--require spec_helper')
+      end
+
+      it 'should enable color' do
+        expect(@buffer.string).to include('--color')
+      end
+
+    end
+
+    context 'should generate a spec_helper.rb file' do
+      before do
+        test_erb_generation 'spec_helper.erb', "spec/spec_helper.rb"
+      end
+
+      it "should require 'simplecov'" do
+        expect(@buffer.string).to include("require 'simplecov'")
+      end
+
+      it "should start SimpleCov" do
+        expect(@buffer.string).to include("SimpleCov.start")
+      end
+
+      it "should configure RSpec" do
+        expect(@buffer.string).to include("RSpec.configure do |config|")
+      end
+
+    end
+
 
   end
 
