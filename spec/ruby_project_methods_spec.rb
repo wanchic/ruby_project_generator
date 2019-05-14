@@ -100,7 +100,7 @@ describe RubyProject do
 
     context 'setting up git and commiting' do
       before do
-        @rp.setup_git_and_commit
+        @rp.setup_gitignore
       end
 
       it "should create .gitignore file" do

@@ -3,7 +3,7 @@
 $LOAD_PATH << File.expand_path(File.join(['..', 'lib']), __dir__ )
 
 require 'rubygems'
-require 'erb'
+
 
 Dir[File.expand_path(File.join(['..', 'lib','*.rb']), __dir__ )].sort.each{|f| require f}
 

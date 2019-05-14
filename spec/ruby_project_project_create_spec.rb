@@ -65,7 +65,7 @@ describe RubyProject do
   end
 
   context 'generating git file' do
-    it_behaves_like 'a generate_erb_template', 'setup_git_and_commit'
+    it_behaves_like 'a generate_erb_template', 'setup_gitignore'
   end
 
 end

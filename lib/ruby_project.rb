@@ -1,6 +1,7 @@
 require 'fileutils'
 require 'erb'
 require 'bundler'
+#require 'git'
 
 class RubyProject
   attr_reader :project_name
@@ -57,8 +58,22 @@ class RubyProject
     generate_erb_template'spec_helper.erb', "spec/spec_helper.rb"
   end
 
-  def setup_git_and_commit
+  def setup_gitignore
     generate_erb_template'gitignore.erb', '.gitignore'
+  end
+
+  def git_commit_init
+    g_repo = Git.init(@root_path)
+    g_repo.config('user.name', 'Eric Wanchic')
+    g_repo.config('user.email', 'eric@gratiel.com')
+    g_repo.add(all: true)
+    g_repo.commit('Initial Project')
+
+  end
+
+  def setup_git_and_commit
+    setup_gitignore
+    #git_commit_init
   end
 
   def generate_erb_template(template_name, new_filename)
