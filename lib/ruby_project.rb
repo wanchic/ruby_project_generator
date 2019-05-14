@@ -18,6 +18,7 @@ class RubyProject
     process_gemfile
     process_main_exec
     process_command_arguments
+    setup_rspec_testing
   end
 
   def create_dir_tree
@@ -50,7 +51,9 @@ class RubyProject
   end
 
   def setup_rspec_testing
-
+    FileUtils.mkdir_p "#{@root_path}/spec"
+    generate_erb_template'rspec.erb', '.rspec'
+    generate_erb_template'spec_helper.erb', "spec/spec_helper.rb"
   end
 
   def generate_erb_template(template_name, new_filename)
